@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4324193264816815" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -211,6 +212,15 @@ body{font-family:'Inter',system-ui,sans-serif;color:var(--navy);background:var(-
 .ft-creative .tpl-mini-top{width:100%;height:40px;background:var(--gold)}
 .ft-creative .tpl-mini-content{padding:12px;display:flex;flex-direction:column;gap:6px}
 .ft-creative .tpl-mini-line{height:6px;background:var(--gray-200);border-radius:2px}
+
+/* Skills Suggestion */
+.skills-input-wrap{position:relative}
+.skill-suggestions{position:absolute;top:100%;left:0;right:0;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);z-index:1000;max-height:220px;overflow-y:auto;margin-top:8px;display:none}
+.skill-suggestions.active{display:block}
+.suggestion-item{padding:12px 16px;cursor:pointer;transition:var(--transition);font-size:14px;color:var(--navy);border-bottom:1px solid var(--gray-50)}
+.suggestion-item:last-child{border-bottom:none}
+.suggestion-item:hover{background:var(--gray-50);color:var(--gold);padding-left:20px}
+
 
 /* Modal and Footer */
 .download-modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
@@ -427,7 +437,8 @@ footer a:hover{color:var(--gold)}
         <h3 class="section-title" style="margin-top:24px">Skills</h3>
         <div class="skills-input-wrap">
           <div class="skills-tags" id="skillsTags"></div>
-          <input type="text" id="skillInput" placeholder="Type a skill and press Enter" onkeydown="addSkill(event)">
+          <input type="text" id="skillInput" placeholder="Type a skill (e.g. PHP, Figma, SEO)" onkeydown="handleSkillKey(event)" oninput="showSuggestions(this.value)">
+          <div id="skillSuggestions" class="skill-suggestions"></div>
         </div>
         <div class="step-nav">
           <button class="prev-btn" onclick="goStep(2)">&larr; Back</button>
@@ -727,10 +738,52 @@ function addEducation(){
 function updateEdu(i,k,v){educations[i][k]=v;updatePreview();}
 function removeEducation(i){document.getElementById('edu-'+i).remove();educations[i]=null;updatePreview();}
 
-function addSkill(e){
-  if(e.key==='Enter'){e.preventDefault();const v=e.target.value.trim();
-  if(v&&!skills.includes(v)){skills.push(v);renderSkills();updatePreview();}e.target.value='';}
+/* SKILLS SUGGESTIONS SYSTEM */
+const ALL_SKILLS = [
+  'JavaScript', 'Python', 'PHP', 'Java', 'C++', 'Ruby', 'Swift', 'Go', 'Rust', 'TypeScript',
+  'HTML5', 'CSS3', 'Sass', 'React', 'Angular', 'Vue.js', 'Node.js', 'Express', 'Django', 'Laravel',
+  'SQL', 'PostgreSQL', 'MongoDB', 'Firebase', 'AWS', 'Docker', 'Kubernetes', 'Git', 'GitHub',
+  'UI/UX Design', 'Figma', 'Adobe XD', 'Photoshop', 'Illustrator', 'Indesign', 'After Effects',
+  'Project Management', 'Agile', 'Scrum', 'Product Strategy', 'Market Research', 'SEO', 'SEM',
+  'Social Media Marketing', 'Copywriting', 'Content Strategy', 'Public Relations', 'Salesforce',
+  'Financial Analysis', 'Accounting', 'Data Analysis', 'Tableau', 'Power BI', 'Microsoft Excel',
+  'Customer Support', 'Communication', 'Leadership', 'Problem Solving', 'Critical Thinking'
+];
+
+function showSuggestions(val) {
+  const container = document.getElementById('skillSuggestions');
+  if (!val.trim()) { container.classList.remove('active'); return; }
+  
+  const matches = ALL_SKILLS.filter(s => s.toLowerCase().includes(val.toLowerCase()) && !skills.includes(s)).slice(0, 8);
+  
+  if (matches.length > 0) {
+    container.innerHTML = matches.map(s => `<div class="suggestion-item" onclick="pickSkill('${s.replace(/'/g, "\\'")}')">${s}</div>`).join('');
+    container.classList.add('active');
+  } else {
+    container.classList.remove('active');
+  }
 }
+
+function pickSkill(s) {
+  if (!skills.includes(s)) {
+    skills.push(s);
+    renderSkills();
+    updatePreview();
+  }
+  document.getElementById('skillInput').value = '';
+  document.getElementById('skillSuggestions').classList.remove('active');
+}
+
+function handleSkillKey(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    const v = e.target.value.trim();
+    if (v) pickSkill(v);
+  }
+}
+
+function addSkill(e) { handleSkillKey(e); }
+
 function removeSkill(i){skills.splice(i,1);renderSkills();updatePreview();}
 function renderSkills(){
   document.getElementById('skillsTags').innerHTML=skills.map((s,i)=>'<span class="skill-tag">'+s+'<button onclick="removeSkill('+i+')">&times;</button></span>').join('');
@@ -864,16 +917,28 @@ function smartEnhance(raw){
 function downloadPDF(){
   const modal = document.getElementById('downloadModal');
   const fill = document.getElementById('loaderFill');
+  const d = getData();
   
   modal.classList.remove('hidden');
   setTimeout(() => fill.style.width = '100%', 10);
 
   setTimeout(() => {
-    const d=getData(),gen={classic:genClassic,modern:genModern,creative:genCreative};
-    document.getElementById('printArea').innerHTML='<div style="padding:40px;max-width:800px;margin:0 auto">'+gen[selectedTemplate](d)+'</div>';
-    window.print();
-    modal.classList.add('hidden');
-    fill.style.width = '0%';
+    const gen={classic:genClassic,modern:genModern,creative:genCreative};
+    const element = document.createElement('div');
+    element.innerHTML = '<div style="padding:40px; background:white; min-height:1120px; font-family:serif;">' + gen[selectedTemplate](d) + '</div>';
+    
+    const opt = {
+      margin: 0,
+      filename: `${d.name.replace(/\s+/g, '_')}_CV.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save().then(() => {
+      modal.classList.add('hidden');
+      fill.style.width = '0%';
+    });
   }, 3000);
 }
 
