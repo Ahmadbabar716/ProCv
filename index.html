@@ -212,6 +212,23 @@ body{font-family:'Inter',system-ui,sans-serif;color:var(--navy);background:var(-
 .ft-creative .tpl-mini-content{padding:12px;display:flex;flex-direction:column;gap:6px}
 .ft-creative .tpl-mini-line{height:6px;background:var(--gray-200);border-radius:2px}
 
+/* Modal and Footer */
+.download-modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
+.modal-content{background:var(--white);width:100%;max-width:500px;border-radius:var(--radius);padding:40px;text-align:center;box-shadow:var(--shadow-lg)}
+.modal-content h2{font-family:'Playfair Display',serif;margin-bottom:16px;color:var(--navy)}
+.modal-ad{width:100%;height:250px;background:var(--gray-50);border:1px dashed var(--gray-300);margin:24px 0;display:flex;align-items:center;justify-content:center;color:var(--gray-400);font-size:14px;position:relative}
+.modal-ad::after{content:'ADVERTISEMENT';position:absolute;top:5px;right:10px;font-size:10px;letter-spacing:1px}
+.loader-bar{width:100%;height:6px;background:var(--gray-100);border-radius:10px;overflow:hidden;margin-top:24px}
+.loader-fill{height:100%;background:var(--gold);width:0%;transition:width 3s linear}
+footer{padding:40px 24px;text-align:center;border-top:1px solid var(--gray-200);margin-top:60px;background:var(--white)}
+footer p{color:var(--gray-400);font-size:14px}
+footer a{color:var(--navy);text-decoration:none;font-weight:600;margin:0 10px}
+footer a:hover{color:var(--gold)}
+.privacy-overlay{position:fixed;inset:0;background:var(--white);z-index:20000;padding:40px;overflow-y:auto}
+.privacy-content{max-width:800px;margin:0 auto}
+.close-privacy{position:fixed;top:20px;right:40px;background:var(--navy);color:white;border:none;padding:10px 20px;border-radius:50px;cursor:pointer}
+
+
 </style>
 </head>
 <body>
@@ -454,6 +471,50 @@ body{font-family:'Inter',system-ui,sans-serif;color:var(--navy);background:var(-
 </section>
 
 <div id="printArea" class="print-area"></div>
+
+<!-- DOWNLOAD MODAL -->
+<div id="downloadModal" class="download-modal hidden">
+  <div class="modal-content">
+    <h2>Preparing Your CV...</h2>
+    <p>Please wait while we generate your professional PDF.</p>
+    <div class="modal-ad" id="ad-download-modal">
+       <!-- Place Display Ad Unit Code Here -->
+       <span>Ad Unit Slot</span>
+    </div>
+    <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+    <p style="margin-top:15px; font-size:12px; color:var(--gray-400)">Download will start automatically</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="no-print">
+  <p>&copy; 2024 ProCV Templates. All rights reserved.</p>
+  <div style="margin-top:10px">
+    <a href="#" onclick="showPrivacy()">Privacy Policy</a>
+    <a href="mailto:support@procv.com">Contact Support</a>
+  </div>
+</footer>
+
+<!-- PRIVACY POLICY OVERLAY -->
+<div id="privacyOverlay" class="privacy-overlay hidden">
+  <button class="close-privacy" onclick="hidePrivacy()">Close</button>
+  <div class="privacy-content">
+    <h1>Privacy Policy</h1>
+    <p>Last updated: May 2024</p>
+    <br>
+    <p>At ProCV, accessible from your domain, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ProCV and how we use it.</p>
+    <br>
+    <h3>AdSense and Third-Party Cookies</h3>
+    <p>Google is one of the third-party vendors on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to our site and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads">https://policies.google.com/technologies/ads</a></p>
+    <br>
+    <h3>Personal Data</h3>
+    <p>We do not store the personal information you enter into our CV builder on our servers. All data is processed locally in your browser to generate the CV. If you choose to download your CV, the data remains on your device.</p>
+    <br>
+    <h3>Contact Us</h3>
+    <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
+  </div>
+</div>
+
 <script>
 let currentStep=1,selectedTemplate='classic',skills=[],experiences=[],educations=[];
 
@@ -801,10 +862,24 @@ function smartEnhance(raw){
 }
 
 function downloadPDF(){
-  const d=getData(),gen={classic:genClassic,modern:genModern,creative:genCreative};
-  document.getElementById('printArea').innerHTML='<div style="padding:40px;max-width:800px;margin:0 auto">'+gen[selectedTemplate](d)+'</div>';
-  window.print();
+  const modal = document.getElementById('downloadModal');
+  const fill = document.getElementById('loaderFill');
+  
+  modal.classList.remove('hidden');
+  setTimeout(() => fill.style.width = '100%', 10);
+
+  setTimeout(() => {
+    const d=getData(),gen={classic:genClassic,modern:genModern,creative:genCreative};
+    document.getElementById('printArea').innerHTML='<div style="padding:40px;max-width:800px;margin:0 auto">'+gen[selectedTemplate](d)+'</div>';
+    window.print();
+    modal.classList.add('hidden');
+    fill.style.width = '0%';
+  }, 3000);
 }
+
+function showPrivacy() { document.getElementById('privacyOverlay').classList.remove('hidden'); }
+function hidePrivacy() { document.getElementById('privacyOverlay').classList.add('hidden'); }
+
 </script>
 </body>
 </html>
