@@ -121,48 +121,23 @@ body{font-family:'Inter',system-ui,sans-serif;color:var(--navy);background:var(-
 .preview-panel{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;min-height:560px}
 .cv-preview{padding:0;font-size:11px;line-height:1.5}
 .cv-placeholder{display:flex;align-items:center;justify-content:center;min-height:500px;color:var(--gray-400);text-align:center;padding:40px}
-.cv-classic{padding:32px;font-family:'Playfair Display',serif}
-.cv-classic .cv-name{font-size:24px;font-weight:800;border-bottom:2px solid #000;padding-bottom:8px;margin-bottom:4px}
-.cv-classic .cv-title{font-size:13px;color:#444;margin-bottom:12px;font-family:'Inter',sans-serif}
-.cv-classic .cv-contact{font-size:10px;color:#666;margin-bottom:16px;font-family:'Inter',sans-serif;display:flex;flex-wrap:wrap;gap:8px}
-.cv-classic .cv-section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #ccc;padding-bottom:4px;margin:14px 0 8px}
-.cv-classic .cv-bio{font-size:11px;font-family:'Inter',sans-serif;color:#333}
-.cv-classic .cv-entry{margin-bottom:10px}
-.cv-classic .cv-entry-header{display:flex;justify-content:space-between;font-weight:600;font-size:12px}
-.cv-classic .cv-entry-sub{font-size:10px;color:#666;font-family:'Inter',sans-serif}
-.cv-classic .cv-entry-desc{font-size:10px;color:#444;font-family:'Inter',sans-serif;margin-top:2px}
-.cv-classic .cv-skills{display:flex;flex-wrap:wrap;gap:4px}
-.cv-classic .cv-skill{background:#f0f0f0;padding:3px 10px;border-radius:3px;font-size:10px;font-family:'Inter',sans-serif}
-.cv-modern{display:flex;font-family:'Inter',sans-serif;min-height:500px}
-.cv-modern .cv-sidebar{width:38%;background:var(--navy);color:white;padding:24px 16px}
-.cv-modern .cv-main{flex:1;padding:24px 20px}
-.cv-modern .cv-name{font-size:20px;font-weight:800;margin-bottom:2px}
-.cv-modern .cv-title{font-size:11px;color:var(--gold);margin-bottom:14px;font-weight:600}
-.cv-modern .cv-contact{font-size:9px;color:rgba(255,255,255,.7);display:flex;flex-direction:column;gap:4px;margin-bottom:16px}
-.cv-modern .cv-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;color:rgba(255,255,255,.5)}
-.cv-modern .cv-section-title-main{font-size:13px;font-weight:700;color:var(--navy);border-left:3px solid var(--gold);padding-left:10px;margin:16px 0 8px}
-.cv-modern .cv-bio{font-size:10px;color:rgba(255,255,255,.8);line-height:1.6}
-.cv-modern .cv-skill{display:inline-block;background:rgba(255,255,255,.1);padding:3px 10px;border-radius:50px;font-size:9px;margin:2px}
-.cv-modern .cv-entry{margin-bottom:12px}
-.cv-modern .cv-entry-header{font-weight:700;font-size:12px;color:var(--navy)}
-.cv-modern .cv-entry-sub{font-size:10px;color:var(--gold-dark);font-weight:600}
-.cv-modern .cv-entry-desc{font-size:10px;color:#555;margin-top:2px}
-.cv-creative{font-family:'Inter',sans-serif;overflow:hidden}
-.cv-creative .cv-header{background:linear-gradient(135deg,var(--navy),var(--navy-light));color:white;padding:28px 24px;text-align:center}
-.cv-creative .cv-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:800}
-.cv-creative .cv-title{font-size:12px;color:var(--gold);font-weight:600;margin-top:2px}
-.cv-creative .cv-contact{font-size:9px;color:rgba(255,255,255,.6);margin-top:8px;display:flex;justify-content:center;flex-wrap:wrap;gap:8px}
-.cv-creative .cv-body{display:flex}
-.cv-creative .cv-sidebar{width:35%;background:var(--gray-50);padding:20px 14px;border-right:2px solid var(--gray-200)}
-.cv-creative .cv-main{flex:1;padding:20px}
-.cv-creative .cv-section-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--gold-dark);margin:12px 0 6px;display:flex;align-items:center;gap:6px}
-.cv-creative .cv-section-title::before{content:'';width:8px;height:8px;background:var(--gold);transform:rotate(45deg);display:inline-block}
-.cv-creative .cv-bio{font-size:10px;color:#555;line-height:1.6}
-.cv-creative .cv-skill{display:inline-block;background:var(--navy);color:white;padding:3px 10px;border-radius:50px;font-size:9px;margin:2px}
-.cv-creative .cv-entry{margin-bottom:10px}
-.cv-creative .cv-entry-header{font-weight:700;font-size:11px;color:var(--navy)}
-.cv-creative .cv-entry-sub{font-size:9px;color:var(--gold-dark);font-weight:600}
-.cv-creative .cv-entry-desc{font-size:9px;color:#555;margin-top:2px}
+/* PDF & Preview Layouts - Standard A4 (794px x 1123px at 96dpi) */
+.cv-classic, .cv-modern, .cv-creative { width: 794px; min-height: 1123px; background: #fff; margin: 0 auto; overflow: hidden; position: relative; box-sizing: border-box; text-align: left; }
+
+.cv-classic { padding: 50px; font-family: 'Playfair Display', serif; }
+.cv-classic .cv-name { font-size: 28px; border-bottom: 2px solid #1B2A4A; padding-bottom: 10px; margin-bottom: 5px; color: #1B2A4A; }
+.cv-classic .cv-title { font-size: 14px; font-family: 'Inter', sans-serif; color: #555; margin-bottom: 15px; }
+
+.cv-modern { display: flex; font-family: 'Inter', sans-serif; }
+.cv-modern .cv-sidebar { width: 280px; background: #1B2A4A; color: white; padding: 40px 25px; min-height: 1123px; box-sizing: border-box; }
+.cv-modern .cv-main { flex: 1; padding: 40px 35px; background: white; min-height: 1123px; box-sizing: border-box; }
+
+.cv-creative { font-family: 'Inter', sans-serif; }
+.cv-creative .cv-header { background: #1B2A4A; color: white; padding: 40px; text-align: center; }
+.cv-creative .cv-body { display: flex; min-height: 900px; }
+.cv-creative .cv-sidebar { width: 280px; background: #f9f9f9; padding: 30px 20px; border-right: 1px solid #eee; min-height: 1000px; }
+.cv-creative .cv-main { flex: 1; padding: 35px; }
+
 @media print{
   body *{visibility:hidden}
   #printArea,#printArea *{visibility:visible}
@@ -900,7 +875,9 @@ function getData(){
 }
 
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
-function contactStr(d,sep){return[d.email,d.phone,d.location,d.linkedin].filter(Boolean).map(i=>esc(i)).join(sep);}
+function contactStr(d,sep){
+  return [d.email, d.phone, d.location, d.linkedin].filter(v => v && v !== 'undefined').map(i=>esc(i)).join(sep);
+}
 
 function genClassic(d){
   let h='<div class="cv-classic"><div class="cv-name">'+esc(d.name)+'</div><div class="cv-title">'+esc(d.title)+'</div>';
@@ -916,7 +893,7 @@ function genClassic(d){
 
 function genModern(d){
   let sb='<div class="cv-sidebar"><div class="cv-name">'+esc(d.name)+'</div><div class="cv-title">'+esc(d.title)+'</div>';
-  sb+='<div class="cv-contact">'+[d.email,d.phone,d.location,d.linkedin].filter(Boolean).map(i=>'<span>'+esc(i)+'</span>').join('')+'</div>';
+  sb+='<div class="cv-contact">'+[d.email,d.phone,d.location,d.linkedin].filter(v=>v && v !== 'undefined').map(i=>'<span>'+esc(i)+'</span>').join('')+'</div>';
   if(d.bio)sb+='<div class="cv-section-title">About</div><div class="cv-bio">'+esc(d.bio)+'</div>';
   if(d.skills.length)sb+='<div class="cv-section-title" style="margin-top:14px">Skills</div><div>'+d.skills.map(s=>'<span class="cv-skill">'+esc(s)+'</span>').join('')+'</div>';
   sb+='</div>';
@@ -1026,14 +1003,21 @@ function downloadPDF(){
     const gen={classic:genClassic,modern:genModern,creative:genCreative};
     const element = document.createElement('div');
     // Simplified wrapper to prevent double padding and blank space
-    element.innerHTML = '<div class="pdf-container" style="background:white; color:#1B2A4A; width:800px;">' + gen[selectedTemplate](d) + '</div>';
+    element.innerHTML = '<div style="width:794px; background:white; overflow:hidden;">' + gen[selectedTemplate](d) + '</div>';
     
     const opt = {
-      margin: [0.2, 0.2, 0.2, 0.2], // Small professional margins
+      margin: 0,
       filename: `${d.name.replace(/\s+/g, '_')}_CV.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, logging: false, letterRendering: true },
-      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      image: { type: 'jpeg', quality: 1.0 },
+      html2canvas: { 
+        scale: 2, 
+        useCORS: true, 
+        letterRendering: true,
+        width: 794,
+        height: 1123,
+        windowWidth: 794
+      },
+      jsPDF: { unit: 'px', format: [794, 1123], orientation: 'portrait' }
     };
 
     html2pdf().set(opt).from(element).save().then(() => {
