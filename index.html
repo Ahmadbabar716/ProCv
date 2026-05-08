@@ -1025,14 +1025,15 @@ function downloadPDF(){
   setTimeout(() => {
     const gen={classic:genClassic,modern:genModern,creative:genCreative};
     const element = document.createElement('div');
-    element.innerHTML = '<div style="padding:40px; background:white; min-height:1120px; font-family:serif;">' + gen[selectedTemplate](d) + '</div>';
+    // Simplified wrapper to prevent double padding and blank space
+    element.innerHTML = '<div class="pdf-container" style="background:white; color:#1B2A4A; width:800px;">' + gen[selectedTemplate](d) + '</div>';
     
     const opt = {
-      margin: 0,
+      margin: [0.2, 0.2, 0.2, 0.2], // Small professional margins
       filename: `${d.name.replace(/\s+/g, '_')}_CV.pdf`,
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      html2canvas: { scale: 2, useCORS: true, logging: false, letterRendering: true },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
 
     html2pdf().set(opt).from(element).save().then(() => {
