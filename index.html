@@ -567,7 +567,7 @@ footer a:hover{color:var(--gold)}
        <!-- Place Display Ad Unit Code Here -->
        <span>Ad Unit Slot</span>
     </div>
-    <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+      <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
     <p style="margin-top:15px; font-size:12px; color:var(--gray-400)">Download will start automatically</p>
   </div>
 </div>
@@ -577,11 +577,13 @@ footer a:hover{color:var(--gold)}
   <p>&copy; 2024 ProCV Templates. All rights reserved.</p>
   <div style="margin-top:10px">
     <a href="#" onclick="showPrivacy()">Privacy Policy</a>
+    <a href="#" onclick="showTerms()">Terms of Service</a>
+    <a href="#" onclick="showDisclaimer()">Disclaimer</a>
     <a href="mailto:support@procv.com">Contact Support</a>
   </div>
 </footer>
 
-<!-- PRIVACY POLICY OVERLAY -->
+<!-- LEGAL OVERLAYS -->
 <div id="privacyOverlay" class="privacy-overlay hidden">
   <button class="close-privacy" onclick="hidePrivacy()">Close</button>
   <div class="privacy-content">
@@ -598,6 +600,29 @@ footer a:hover{color:var(--gold)}
     <br>
     <h3>Contact Us</h3>
     <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
+  </div>
+</div>
+
+<div id="termsOverlay" class="privacy-overlay hidden">
+  <button class="close-privacy" onclick="hideTerms()">Close</button>
+  <div class="privacy-content">
+    <h1>Terms of Service</h1>
+    <p>By using ProCV, you agree to the following terms:</p>
+    <br>
+    <p>1. <strong>Usage:</strong> You may use our generator for personal or professional purposes to create resumes. You may not use it for illegal activities.</p>
+    <p>2. <strong>Accuracy:</strong> You are responsible for the accuracy of the data you enter. ProCV is not liable for any discrepancies in the generated documents.</p>
+    <p>3. <strong>Availability:</strong> While we strive for 100% uptime, we do not guarantee uninterrupted service.</p>
+  </div>
+</div>
+
+<div id="disclaimerOverlay" class="privacy-overlay hidden">
+  <button class="close-privacy" onclick="hideDisclaimer()">Close</button>
+  <div class="privacy-content">
+    <h1>Disclaimer</h1>
+    <br>
+    <p>The information provided by ProCV is for general informational purposes only. All information on the site is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the site.</p>
+    <br>
+    <p>UNDER NO CIRCUMSTANCE SHALL WE HAVE ANY LIABILITY TO YOU FOR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A RESULT OF THE USE OF THE SITE OR RELIANCE ON ANY INFORMATION PROVIDED ON THE SITE. YOUR USE OF THE SITE AND YOUR RELIANCE ON ANY INFORMATION ON THE SITE IS SOLELY AT YOUR OWN RISK.</p>
   </div>
 </div>
 
@@ -1019,6 +1044,10 @@ function downloadPDF(){
 
 function showPrivacy() { document.getElementById('privacyOverlay').classList.remove('hidden'); }
 function hidePrivacy() { document.getElementById('privacyOverlay').classList.add('hidden'); }
+function showTerms() { document.getElementById('termsOverlay').classList.remove('hidden'); }
+function hideTerms() { document.getElementById('termsOverlay').classList.add('hidden'); }
+function showDisclaimer() { document.getElementById('disclaimerOverlay').classList.remove('hidden'); }
+function hideDisclaimer() { document.getElementById('disclaimerOverlay').classList.add('hidden'); }
 
 </script>
 </body>
