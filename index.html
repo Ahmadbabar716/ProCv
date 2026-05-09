@@ -118,25 +118,134 @@ body{font-family:'Inter',system-ui,sans-serif;color:var(--navy);background:var(-
 .tpl-creative-prev .tpl-mini-top{height:30px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:4px}
 .tpl-mini-dots{display:flex;gap:6px}
 .tpl-mini-dots::before,.tpl-mini-dots::after{content:'';width:12px;height:12px;border-radius:50%;background:var(--gold);opacity:.4}
-.preview-panel{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;min-height:560px}
-.cv-preview{padding:0;font-size:11px;line-height:1.5}
-.cv-placeholder{display:flex;align-items:center;justify-content:center;min-height:500px;color:var(--gray-400);text-align:center;padding:40px}
-/* PDF & Preview Layouts - Standard A4 (794px x 1123px at 96dpi) */
-.cv-classic, .cv-modern, .cv-creative { width: 794px; min-height: 1123px; background: #fff; margin: 0 auto; overflow: hidden; position: relative; box-sizing: border-box; text-align: left; }
 
-.cv-classic { padding: 50px; font-family: 'Playfair Display', serif; }
-.cv-classic .cv-name { font-size: 28px; border-bottom: 2px solid #1B2A4A; padding-bottom: 10px; margin-bottom: 5px; color: #1B2A4A; }
-.cv-classic .cv-title { font-size: 14px; font-family: 'Inter', sans-serif; color: #555; margin-bottom: 15px; }
+.preview-panel{background:var(--gray-100);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;min-height:560px;padding:16px;position:relative}
+.cv-preview-wrapper{width:794px;height:1123px;transform:scale(0.48);transform-origin:top left;margin-right:-413px;margin-bottom:-584px}
+.cv-preview{width:100%;height:100%;background:white;box-shadow:var(--shadow-lg)}
+@media(min-width: 1400px) { .cv-preview-wrapper { transform: scale(0.52); margin-right:-381px; margin-bottom:-539px; } }
+@media(max-width: 1024px) { .cv-preview-wrapper { transform: scale(0.45); margin-right:-437px; margin-bottom:-618px; } .preview-panel { min-height: 520px; padding: 10px; } }
+@media(max-width: 500px) { .cv-preview-wrapper { transform: scale(0.38); margin-right:-492px; margin-bottom:-697px; } .preview-panel { min-height: 440px; } }
 
-.cv-modern { display: flex; font-family: 'Inter', sans-serif; }
-.cv-modern .cv-sidebar { width: 280px; background: #1B2A4A; color: white; padding: 40px 25px; min-height: 1123px; box-sizing: border-box; }
-.cv-modern .cv-main { flex: 1; padding: 40px 35px; background: white; min-height: 1123px; box-sizing: border-box; }
+.cv-placeholder{display:flex;align-items:center;justify-content:center;height:100%;color:var(--gray-400);text-align:center;padding:40px;width:100%;background:white}
 
-.cv-creative { font-family: 'Inter', sans-serif; }
-.cv-creative .cv-header { background: #1B2A4A; color: white; padding: 40px; text-align: center; }
-.cv-creative .cv-body { display: flex; min-height: 900px; }
-.cv-creative .cv-sidebar { width: 280px; background: #f9f9f9; padding: 30px 20px; border-right: 1px solid #eee; min-height: 1000px; }
-.cv-creative .cv-main { flex: 1; padding: 35px; }
+/* PDF & Preview Layouts - Standard A4 (794px x 1123px) */
+.cv-classic, .cv-modern, .cv-creative { 
+  width: 794px; 
+  min-height: 1123px; 
+  background: #fff; 
+  margin: 0; 
+  overflow: hidden; 
+  position: relative; 
+  box-sizing: border-box; 
+  text-align: left;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.cv-classic { padding: 60px; font-family: 'Playfair Display', serif; }
+
+.cv-modern { 
+  display: block; 
+  font-family: 'Inter', sans-serif; 
+}
+.cv-modern::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.cv-modern .cv-sidebar { 
+  float: left;
+  width: 260px;
+  background: #1B2A4A; 
+  color: white; 
+  padding: 40px 25px; 
+  min-height: 1123px; 
+  box-sizing: border-box;
+}
+.cv-modern .cv-main { 
+  float: left;
+  width: 534px;
+  padding: 40px 40px; 
+  background: white; 
+  min-height: 1123px; 
+  box-sizing: border-box;
+}
+
+.cv-creative { 
+  font-family: 'Inter', sans-serif; 
+  display: block;
+}
+.cv-creative .cv-header { 
+  background: #1B2A4A; 
+  color: white; 
+  padding: 40px; 
+  text-align: center; 
+  width: 100%;
+  box-sizing: border-box;
+}
+.cv-creative .cv-body { 
+  display: block; 
+}
+.cv-creative .cv-body::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.cv-creative .cv-sidebar { 
+  float: left;
+  width: 260px;
+  background: #f9f9f9; 
+  padding: 30px 20px; 
+  border-right: 1px solid #eee; 
+  min-height: 1123px;
+  box-sizing: border-box;
+}
+.cv-creative .cv-main { 
+  float: left;
+  width: 534px;
+  padding: 40px; 
+  background: white;
+  box-sizing: border-box;
+}
+
+/* CV Typography & Shared Styles */
+.cv-name { font-size: 32px; font-weight: 700; margin-bottom: 4px; line-height: 1.2; color: var(--navy); }
+.cv-title { font-size: 18px; color: var(--gold-dark); margin-bottom: 12px; font-weight: 500; }
+.cv-contact { font-size: 12px; color: var(--gray-500); margin-bottom: 24px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-start; }
+.cv-section-title { font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; border-bottom: 2px solid var(--gray-200); padding-bottom: 4px; color: var(--navy); margin-top: 24px; }
+.cv-bio { font-size: 13px; line-height: 1.6; color: var(--gray-500); margin-bottom: 24px; }
+.cv-entry { margin-bottom: 16px; }
+.cv-entry-header { display: flex; justify-content: space-between; font-weight: 600; font-size: 14px; color: var(--navy); margin-bottom: 2px; }
+.cv-entry-sub { font-size: 13px; color: var(--gold-dark); font-weight: 500; margin-bottom: 4px; }
+.cv-entry-desc { font-size: 12px; line-height: 1.5; color: var(--gray-500); }
+.cv-skills { display: flex; flex-wrap: wrap; gap: 8px; }
+.cv-skill { font-size: 12px; background: var(--gray-100); color: var(--navy); padding: 4px 10px; border-radius: 4px; font-weight: 500; }
+
+/* Classic Template Overrides */
+.cv-classic .cv-name { font-size: 36px; text-align: center; }
+.cv-classic .cv-title { text-align: center; font-size: 20px; }
+.cv-classic .cv-contact { justify-content: center; text-align: center; font-size: 13px; margin-bottom: 30px; }
+.cv-classic .cv-section-title { border-bottom-color: var(--navy); margin-top: 30px; }
+.cv-classic .cv-bio, .cv-classic .cv-entry-desc { font-size: 14px; }
+
+/* Modern Template Overrides */
+.cv-modern .cv-name { color: white; font-size: 28px; }
+.cv-modern .cv-title { color: var(--gold); font-size: 16px; margin-bottom: 24px; }
+.cv-modern .cv-contact { flex-direction: column; color: rgba(255,255,255,0.8); gap: 12px; font-size: 13px; margin-bottom: 30px; }
+.cv-modern .cv-contact span { display: block; }
+.cv-modern .cv-sidebar .cv-section-title { color: white; border-bottom-color: rgba(255,255,255,0.2); }
+.cv-modern .cv-sidebar .cv-bio { color: rgba(255,255,255,0.8); }
+.cv-modern .cv-sidebar .cv-skill { background: rgba(255,255,255,0.1); color: white; }
+.cv-modern .cv-section-title-main { font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; border-bottom: 2px solid var(--gray-200); padding-bottom: 8px; color: var(--navy); margin-top: 0; }
+.cv-modern .cv-entry-header { font-size: 16px; }
+.cv-modern .cv-entry-sub { font-size: 14px; }
+.cv-modern .cv-entry-desc { font-size: 13px; }
+
+/* Creative Template Overrides */
+.cv-creative .cv-header { margin-bottom: 0; }
+.cv-creative .cv-name { color: white; font-size: 36px; }
+.cv-creative .cv-title { color: var(--gold); }
+.cv-creative .cv-contact { justify-content: center; color: rgba(255,255,255,0.8); margin-bottom: 0; }
+.cv-creative .cv-sidebar .cv-section-title { margin-top: 0; }
 
 @media print{
   body *{visibility:hidden}
@@ -463,7 +572,9 @@ footer a:hover{color:var(--gold)}
 
     <div class="preview-side">
       <div class="preview-panel" id="previewPanel">
-        <div class="cv-preview" id="cvPreview"><div class="cv-placeholder"><p>Your CV preview will appear here as you fill in the form</p></div></div>
+        <div class="cv-preview-wrapper">
+          <div class="cv-preview" id="cvPreview"><div class="cv-placeholder"><p>Your CV preview will appear here as you fill in the form</p></div></div>
+        </div>
       </div>
       <div class="ad-slot ad-sidebar" id="ad-sidebar"><span>Advertisement</span></div>
     </div>
@@ -753,7 +864,7 @@ function useFreeTemplate(type, role) {
   document.getElementById('email').value = data.email;
   document.getElementById('phone').value = data.phone;
   document.getElementById('location').value = data.location;
-  document.getElementById('linkedin').value = data.linkedin;
+  document.getElementById('linkedin').value = data.linkedin || '';
   document.getElementById('bio').value = data.bio;
   
   experiences = data.exp;
@@ -876,7 +987,7 @@ function getData(){
 
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 function contactStr(d,sep){
-  return [d.email, d.phone, d.location, d.linkedin].filter(v => v && v !== 'undefined').map(i=>esc(i)).join(sep);
+  return [d.email, d.phone, d.location, d.linkedin].filter(v => v && String(v).trim().toLowerCase() !== 'undefined').map(i=>esc(i)).join(sep);
 }
 
 function genClassic(d){
@@ -893,9 +1004,9 @@ function genClassic(d){
 
 function genModern(d){
   let sb='<div class="cv-sidebar"><div class="cv-name">'+esc(d.name)+'</div><div class="cv-title">'+esc(d.title)+'</div>';
-  sb+='<div class="cv-contact">'+[d.email,d.phone,d.location,d.linkedin].filter(v=>v && v !== 'undefined').map(i=>'<span>'+esc(i)+'</span>').join('')+'</div>';
+  sb+='<div class="cv-contact">'+[d.email,d.phone,d.location,d.linkedin].filter(v=>v && String(v).trim().toLowerCase() !== 'undefined').map(i=>'<span>'+esc(i)+'</span>').join('')+'</div>';
   if(d.bio)sb+='<div class="cv-section-title">About</div><div class="cv-bio">'+esc(d.bio)+'</div>';
-  if(d.skills.length)sb+='<div class="cv-section-title" style="margin-top:14px">Skills</div><div>'+d.skills.map(s=>'<span class="cv-skill">'+esc(s)+'</span>').join('')+'</div>';
+  if(d.skills.length)sb+='<div class="cv-section-title" style="margin-top:14px">Skills</div><div class="cv-skills">'+d.skills.map(s=>'<span class="cv-skill">'+esc(s)+'</span>').join('')+'</div>';
   sb+='</div>';
   let m='<div class="cv-main">';
   if(d.experiences.some(e=>e.company||e.role)){m+='<div class="cv-section-title-main">Experience</div>';
@@ -910,7 +1021,7 @@ function genCreative(d){
   h+='<div class="cv-contact">'+contactStr(d,' | ')+'</div></div><div class="cv-body">';
   h+='<div class="cv-sidebar">';
   if(d.bio)h+='<div class="cv-section-title">About Me</div><div class="cv-bio">'+esc(d.bio)+'</div>';
-  if(d.skills.length)h+='<div class="cv-section-title">Skills</div><div>'+d.skills.map(s=>'<span class="cv-skill">'+esc(s)+'</span>').join('')+'</div>';
+  if(d.skills.length)h+='<div class="cv-section-title">Skills</div><div class="cv-skills">'+d.skills.map(s=>'<span class="cv-skill">'+esc(s)+'</span>').join('')+'</div>';
   if(d.educations.some(e=>e.degree||e.school)){h+='<div class="cv-section-title">Education</div>';
     d.educations.forEach(e=>{if(!e.degree&&!e.school)return;h+='<div class="cv-entry"><div class="cv-entry-header">'+esc(e.degree||'Degree')+'</div><div class="cv-entry-sub">'+esc(e.school)+' - '+esc(e.year)+'</div></div>';});}
   h+='</div><div class="cv-main">';
@@ -991,39 +1102,124 @@ function smartEnhance(raw){
   return text;
 }
 
+/* === PDF-SPECIFIC GENERATORS (all inline styles + table layout) === */
+function pdfContactStr(d, sep) {
+  return [d.email, d.phone, d.location, d.linkedin].filter(v => v && String(v).trim().toLowerCase() !== 'undefined').map(i => esc(i)).join(sep);
+}
+
+function pdfSectionTitle(text, color, borderColor) {
+  return '<div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;border-bottom:2px solid '+borderColor+';padding-bottom:4px;color:'+color+';margin-top:20px;">'+text+'</div>';
+}
+
+function pdfEntry(role, sub, desc, nameColor, subColor, descColor) {
+  let h = '<div style="margin-bottom:14px;">';
+  h += '<div style="font-weight:600;font-size:13px;color:'+nameColor+';margin-bottom:2px;">'+esc(role)+'</div>';
+  h += '<div style="font-size:12px;color:'+subColor+';font-weight:500;margin-bottom:3px;">'+esc(sub)+'</div>';
+  if(desc) h += '<div style="font-size:11px;line-height:1.5;color:'+descColor+';">'+esc(desc)+'</div>';
+  h += '</div>';
+  return h;
+}
+
+function pdfSkills(skillsArr, bg, color) {
+  return skillsArr.map(s => '<span style="display:inline-block;font-size:11px;background:'+bg+';color:'+color+';padding:3px 8px;border-radius:4px;font-weight:500;margin:0 6px 6px 0;">'+esc(s)+'</span>').join('');
+}
+
+function pdfGenClassic(d){
+  let h='<div style="width:794px;min-height:1123px;background:#fff;padding:60px;box-sizing:border-box;font-family:Georgia,serif;">';
+  h+='<div style="text-align:center;font-size:32px;font-weight:700;color:#1B2A4A;margin-bottom:4px;">'+esc(d.name)+'</div>';
+  h+='<div style="text-align:center;font-size:18px;color:#b8922e;margin-bottom:12px;font-weight:500;">'+esc(d.title)+'</div>';
+  h+='<div style="text-align:center;font-size:12px;color:#5a6478;margin-bottom:30px;">'+pdfContactStr(d,' | ')+'</div>';
+  if(d.bio){h+=pdfSectionTitle('Professional Summary','#1B2A4A','#1B2A4A');h+='<div style="font-size:13px;line-height:1.6;color:#5a6478;margin-bottom:20px;">'+esc(d.bio)+'</div>';}
+  if(d.experiences.some(e=>e.company||e.role)){h+=pdfSectionTitle('Work Experience','#1B2A4A','#1B2A4A');
+    d.experiences.forEach(e=>{if(!e.company&&!e.role)return;
+      h+='<div style="margin-bottom:14px;"><table cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;"><tr><td style="font-weight:600;font-size:13px;color:#1B2A4A;padding:0 0 2px 0;">'+esc(e.role||'Role')+'</td><td style="font-weight:600;font-size:13px;color:#1B2A4A;text-align:right;padding:0 0 2px 0;">'+esc(e.years)+'</td></tr></table>';
+      h+='<div style="font-size:12px;color:#b8922e;font-weight:500;margin-bottom:3px;">'+esc(e.company)+'</div>';
+      if(e.desc)h+='<div style="font-size:11px;line-height:1.5;color:#5a6478;">'+esc(e.desc)+'</div>';
+      h+='</div>';});}
+  if(d.educations.some(e=>e.degree||e.school)){h+=pdfSectionTitle('Education','#1B2A4A','#1B2A4A');
+    d.educations.forEach(e=>{if(!e.degree&&!e.school)return;
+      h+='<div style="margin-bottom:14px;"><table cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;"><tr><td style="font-weight:600;font-size:13px;color:#1B2A4A;padding:0 0 2px 0;">'+esc(e.degree||'Degree')+'</td><td style="font-weight:600;font-size:13px;color:#1B2A4A;text-align:right;padding:0 0 2px 0;">'+esc(e.year)+'</td></tr></table>';
+      h+='<div style="font-size:12px;color:#b8922e;font-weight:500;">'+esc(e.school)+'</div></div>';});}
+  if(d.skills.length){h+=pdfSectionTitle('Skills','#1B2A4A','#1B2A4A');h+='<div>'+pdfSkills(d.skills,'#eef1f6','#1B2A4A')+'</div>';}
+  return h+'</div>';
+}
+
+function pdfGenModern(d){
+  let sb='';
+  sb+='<div style="font-size:24px;font-weight:700;color:white;margin-bottom:4px;">'+esc(d.name)+'</div>';
+  sb+='<div style="font-size:14px;color:#D4A843;margin-bottom:20px;font-weight:500;">'+esc(d.title)+'</div>';
+  let contactItems=[d.email,d.phone,d.location,d.linkedin].filter(v=>v && String(v).trim().toLowerCase()!=='undefined');
+  sb+='<div style="margin-bottom:24px;">'+contactItems.map(i=>'<div style="font-size:12px;color:rgba(255,255,255,0.8);margin-bottom:8px;">'+esc(i)+'</div>').join('')+'</div>';
+  if(d.bio){sb+=pdfSectionTitle('About','#fff','rgba(255,255,255,0.2)');sb+='<div style="font-size:12px;line-height:1.6;color:rgba(255,255,255,0.8);margin-bottom:20px;">'+esc(d.bio)+'</div>';}
+  if(d.skills.length){sb+='<div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;border-bottom:2px solid rgba(255,255,255,0.2);padding-bottom:4px;color:#fff;margin-top:14px;">Skills</div>';
+    sb+='<div>'+pdfSkills(d.skills,'rgba(255,255,255,0.1)','#fff')+'</div>';}
+
+  let m='';
+  if(d.experiences.some(e=>e.company||e.role)){m+='<div style="font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;border-bottom:2px solid #dde2ec;padding-bottom:6px;color:#1B2A4A;">Experience</div>';
+    d.experiences.forEach(e=>{if(!e.company&&!e.role)return;m+=pdfEntry(e.role||'Role',e.company+' - '+e.years,e.desc,'#1B2A4A','#b8922e','#5a6478');});}
+  if(d.educations.some(e=>e.degree||e.school)){m+='<div style="font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;border-bottom:2px solid #dde2ec;padding-bottom:6px;color:#1B2A4A;margin-top:20px;">Education</div>';
+    d.educations.forEach(e=>{if(!e.degree&&!e.school)return;m+=pdfEntry(e.degree||'Degree',e.school+' - '+e.year,null,'#1B2A4A','#b8922e','#5a6478');});}
+
+  return '<table cellpadding="0" cellspacing="0" border="0" style="width:794px;min-height:1123px;border-collapse:collapse;font-family:Inter,Helvetica,Arial,sans-serif;">'
+    +'<tr><td style="width:260px;background:#1B2A4A;color:white;padding:40px 25px;vertical-align:top;">'+sb+'</td>'
+    +'<td style="background:#fff;padding:40px;vertical-align:top;">'+m+'</td></tr></table>';
+}
+
+function pdfGenCreative(d){
+  let header='<div style="background:#1B2A4A;color:white;padding:40px;text-align:center;width:100%;box-sizing:border-box;">';
+  header+='<div style="font-size:32px;font-weight:700;color:white;margin-bottom:4px;">'+esc(d.name)+'</div>';
+  header+='<div style="font-size:16px;color:#D4A843;margin-bottom:10px;font-weight:500;">'+esc(d.title)+'</div>';
+  header+='<div style="font-size:12px;color:rgba(255,255,255,0.8);">'+pdfContactStr(d,' | ')+'</div>';
+  header+='</div>';
+
+  let sb='';
+  if(d.bio){sb+='<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;border-bottom:2px solid #ddd;padding-bottom:4px;color:#1B2A4A;">About Me</div>';
+    sb+='<div style="font-size:12px;line-height:1.6;color:#5a6478;margin-bottom:16px;">'+esc(d.bio)+'</div>';}
+  if(d.skills.length){sb+='<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;border-bottom:2px solid #ddd;padding-bottom:4px;color:#1B2A4A;margin-top:16px;">Skills</div>';
+    sb+='<div>'+pdfSkills(d.skills,'#eef1f6','#1B2A4A')+'</div>';}
+  if(d.educations.some(e=>e.degree||e.school)){sb+='<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;border-bottom:2px solid #ddd;padding-bottom:4px;color:#1B2A4A;margin-top:16px;">Education</div>';
+    d.educations.forEach(e=>{if(!e.degree&&!e.school)return;sb+=pdfEntry(e.degree||'Degree',e.school+' - '+e.year,null,'#1B2A4A','#b8922e','#5a6478');});}
+
+  let m='';
+  if(d.experiences.some(e=>e.company||e.role)){m+='<div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;border-bottom:2px solid #dde2ec;padding-bottom:4px;color:#1B2A4A;">Experience</div>';
+    d.experiences.forEach(e=>{if(!e.company&&!e.role)return;m+=pdfEntry(e.role||'Role',e.company+' - '+e.years,e.desc,'#1B2A4A','#b8922e','#5a6478');});}
+
+  return '<div style="width:794px;min-height:1123px;font-family:Inter,Helvetica,Arial,sans-serif;">'+header
+    +'<table cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;">'
+    +'<tr><td style="width:260px;background:#f9f9f9;padding:30px 20px;vertical-align:top;border-right:1px solid #eee;">'+sb+'</td>'
+    +'<td style="background:#fff;padding:40px;vertical-align:top;">'+m+'</td></tr></table></div>';
+}
+
 function downloadPDF(){
-  const modal = document.getElementById('downloadModal');
-  const fill = document.getElementById('loaderFill');
-  const d = getData();
+  var modal = document.getElementById('downloadModal');
+  var fill = document.getElementById('loaderFill');
+  var d = getData();
   
   modal.classList.remove('hidden');
-  setTimeout(() => fill.style.width = '100%', 10);
+  setTimeout(function(){ fill.style.width = '100%'; }, 10);
 
-  setTimeout(() => {
-    const gen={classic:genClassic,modern:genModern,creative:genCreative};
-    const element = document.createElement('div');
-    // Simplified wrapper to prevent double padding and blank space
-    element.innerHTML = '<div style="width:794px; background:white; overflow:hidden;">' + gen[selectedTemplate](d) + '</div>';
+  setTimeout(function(){
+    var pdfGen = {classic: pdfGenClassic, modern: pdfGenModern, creative: pdfGenCreative};
     
-    const opt = {
-      margin: 0,
-      filename: `${d.name.replace(/\s+/g, '_')}_CV.pdf`,
-      image: { type: 'jpeg', quality: 1.0 },
-      html2canvas: { 
-        scale: 2, 
-        useCORS: true, 
-        letterRendering: true,
-        width: 794,
-        height: 1123,
-        windowWidth: 794
-      },
-      jsPDF: { unit: 'px', format: [794, 1123], orientation: 'portrait' }
-    };
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText = 'position:fixed;left:0;top:0;width:794px;z-index:99999;background:#fff;';
+    wrapper.innerHTML = pdfGen[selectedTemplate](d);
+    document.body.appendChild(wrapper);
+    
+    var cvEl = wrapper.firstChild;
 
-    html2pdf().set(opt).from(element).save().then(() => {
+    html2pdf().set({
+      margin: 0,
+      filename: d.name.replace(/\s+/g,'_') + '_CV.pdf',
+      image: { type: 'jpeg', quality: 1.0 },
+      html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+      jsPDF: { unit: 'px', format: [794, 1123], orientation: 'portrait' }
+    }).from(cvEl).save().then(function(){
+      document.body.removeChild(wrapper);
       modal.classList.add('hidden');
       fill.style.width = '0%';
     });
+
   }, 3000);
 }
 
